@@ -1,0 +1,38 @@
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\bin\Debug\net8.0\RobotProject.exe
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\bin\Debug\net8.0\RobotProject.deps.json
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\bin\Debug\net8.0\RobotProject.runtimeconfig.json
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\bin\Debug\net8.0\RobotProject.dll
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\bin\Debug\net8.0\RobotProject.pdb
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\bin\Debug\net8.0\System.Device.Gpio.dll
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\bin\Debug\net8.0\StatisticalRobot-Lib.dll
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.csproj.AssemblyReference.cache
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.AssemblyInfoInputs.cache
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.AssemblyInfo.cs
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.csproj.CoreCompileInputs.cache
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.sourcelink.json
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotPro.07BB9E49.Up2Date
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.dll
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\refint\RobotProject.dll
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.pdb
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\RobotProject.genruntimeconfig.cache
+C:\Users\koens\Documents\Avans\School-assignments\Avans\Projecten\Prototype Robotics\ICT1.2-Empty-Robot-Project-main\obj\Debug\net8.0\ref\RobotProject.dll
+C:\Users\koens\Documents\Avans\Robot-Code\bin\Debug\net8.0\RobotProject.exe
+C:\Users\koens\Documents\Avans\Robot-Code\bin\Debug\net8.0\RobotProject.deps.json
+C:\Users\koens\Documents\Avans\Robot-Code\bin\Debug\net8.0\RobotProject.runtimeconfig.json
+C:\Users\koens\Documents\Avans\Robot-Code\bin\Debug\net8.0\RobotProject.dll
+C:\Users\koens\Documents\Avans\Robot-Code\bin\Debug\net8.0\RobotProject.pdb
+C:\Users\koens\Documents\Avans\Robot-Code\bin\Debug\net8.0\System.Device.Gpio.dll
+C:\Users\koens\Documents\Avans\Robot-Code\bin\Debug\net8.0\StatisticalRobot-Lib.dll
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.csproj.AssemblyReference.cache
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.AssemblyInfoInputs.cache
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.AssemblyInfo.cs
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.csproj.CoreCompileInputs.cache
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.sourcelink.json
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotPro.07BB9E49.Up2Date
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.dll
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\refint\RobotProject.dll
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.pdb
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\RobotProject.genruntimeconfig.cache
+C:\Users\koens\Documents\Avans\Robot-Code\obj\Debug\net8.0\ref\RobotProject.dll
