@@ -60,3 +60,5 @@ Robot-App/obj/project.assets.json
 Robot-App/obj/project.nuget.cache
 Robot-App/obj/Robot-App.csproj.nuget.dgspec.json
 Robot-App/obj/Robot-App.csproj.nuget.g.props
+/Robot-App/obj/Debug/net8.0
+/Robot-Code/obj
