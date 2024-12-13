@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,14 +6,11 @@
     <Nullable>enable</Nullable>
     <PlatformTarget>ARM64</PlatformTarget>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="avans.statisticalrobot" Version="1.0.1" />
+    <PackageReference Include="Avans.StatisticalRobot" Version="1.0.4" />
     <PackageReference Include="System.Device.Gpio" Version="3.2.0" />
   </ItemGroup>
-
   <ItemGroup>
     
   </ItemGroup>
-
 </Project>

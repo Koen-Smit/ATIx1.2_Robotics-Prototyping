@@ -1,84 +1,35 @@
+using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Device.Gpio;
+using System.Device.I2c;
+using GyroscopeCompass;
 using Avans.StatisticalRobot;
+using GyroscopeCompass.GyroscopeCompass;
 
-Led led5 = new Led(5);
-led5.SetOff();
+// display version and build timestamp
+FileVersionInfo vi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
+FileInfo fileInfo = new System.IO.FileInfo(vi.FileName);
+DateTime createTime = fileInfo.CreationTime;
+Console.WriteLine($"SimpleRobot started (v{vi.FileVersion} @ {createTime}) ");
+Robot.PlayNotes("g>g");
 
-Button button6 = new Button(6);
+// Create a boolean for toggling the yellow led on the Romi board
+bool blinkLedOn = true;
 
-bool isLedOn = false;
+// Create the WheeledRobot object and initialize it
+WheeledRobot robot = new WheeledRobot();
+await robot.Init();
 
+// Enter the main infinite processing loop
 while (true)
 {
-    if (button6.GetState() == "Pressed")
-    {
-        isLedOn = !isLedOn;
-        if (isLedOn)
-        {
-            led5.SetOn();
-        }
-        else
-        {
-            led5.SetOff();
-        }
+    robot.Update(); // Let robot perform its functions
 
-        Console.WriteLine("Het aantal millivolts :" + Robot.ReadBatteryMillivolts()); 
-        Robot.Wait(200); 
+    // Blink yellow led on Romi board to show activity
+    blinkLedOn = !blinkLedOn;
+    Robot.LEDs(0, (byte) (blinkLedOn ? 255 : 0), 0);
 
-        if (Robot.ReadBatteryMillivolts() < 3000)
-        {
-            Robot.LEDs(255, 0, 0);
-        }
-        else
-        {
-            Robot.LEDs(0, 255, 0);
-        }
-    }
+    Robot.Wait(200); // This wait time can be optimized for better response
 }
 
-
-
- // Play the Song of Storms sequence
-    // Robot.PlayNotes("D5");
-    // Robot.Wait(400); // Wait for 400ms
-
-    // Robot.PlayNotes("F5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("D5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("F5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("D5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("F5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("A5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("G5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("F5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("G5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("F5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("G5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("F5");
-    // Robot.Wait(400);
-
-    // Robot.PlayNotes("G5");
-    // Robot.Wait(400);
-    // Add a short pause at the end of the loop for musical effect
-    // Robot.Wait(800);

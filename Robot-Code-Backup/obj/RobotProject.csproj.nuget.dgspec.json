@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\koens\\Documents\\Avans\\Robot-Code\\RobotProject.csproj": {}
+    "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\RobotProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\koens\\Documents\\Avans\\Robot-Code\\RobotProject.csproj": {
+    "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\RobotProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\koens\\Documents\\Avans\\Robot-Code\\RobotProject.csproj",
+        "projectUniqueName": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\RobotProject.csproj",
         "projectName": "RobotProject",
-        "projectPath": "C:\\Users\\koens\\Documents\\Avans\\Robot-Code\\RobotProject.csproj",
+        "projectPath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\RobotProject.csproj",
         "packagesPath": "C:\\Users\\koens\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\koens\\Documents\\Avans\\Robot-Code\\obj\\",
+        "outputPath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\koens\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,13 +43,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Avans.StatisticalRobot": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
             "System.Device.Gpio": {
               "target": "Package",
               "version": "[3.2.0, )"
-            },
-            "avans.statisticalrobot": {
-              "target": "Package",
-              "version": "[1.0.1, )"
             }
           },
           "imports": [
