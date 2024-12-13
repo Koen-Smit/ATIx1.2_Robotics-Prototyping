@@ -1,4 +1,4 @@
-﻿using HiveMQtt.Client;
+using HiveMQtt.Client;
 using HiveMQtt.Client.Events;
 using HiveMQtt.MQTT5.ReasonCodes;
 using HiveMQtt.MQTT5.Types;
@@ -151,13 +151,13 @@ public class SimpleMqttClient : IDisposable
     {
         var mqttWrapper = new SimpleMqttClient(new()
         {
-            Host = "6bf2613462514a79bf06928b93d37bcc.s1.eu.hivemq.cloud", // Uses the public HiveMQ MQTT broker for this quick demo
+            Host = "", // Uses the public HiveMQ MQTT broker for this quick demo
             Port = 8883,
             CleanStart = false, // <--- false, haalt al gebufferde meldingen ook op.
             ClientId = clientId, // Dit clientid moet uniek zijn binnen de broker
             TimeoutInMs = 5_000, // Standaard time-out bij het maken van een verbinding (5 seconden)
-            UserName = "hivemq.webclient.1732789978578", // Public HiveMQ MQTT broker doesn't request a username and password
-            Password = "*0pr?$ks7GXDA6ewF1.T"
+            UserName = "", // Public HiveMQ MQTT broker doesn't request a username and password
+            Password = ""
         });
 
         return mqttWrapper;
