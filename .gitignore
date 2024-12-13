@@ -63,3 +63,4 @@ Robot-App/obj/Robot-App.csproj.nuget.g.props
 /Robot-App/obj/Debug/net8.0
 /Robot-Code/obj
 Robot-Code/Models/SimpleMqttClient.cs
+/Robot-Code/Assets/Secret
