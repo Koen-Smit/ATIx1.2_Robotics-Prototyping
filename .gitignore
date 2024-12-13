@@ -54,3 +54,9 @@ dkms.conf
 /Robot-App/bin
 /Robot-App/obj
 /Robot-App/obj
+Robot-App/obj/Debug/net8.0/Robot-App.AssemblyInfo.cs
+Robot-App/obj/Debug/net8.0/Robot-App.GeneratedMSBuildEditorConfig.editorconfig
+Robot-App/obj/project.assets.json
+Robot-App/obj/project.nuget.cache
+Robot-App/obj/Robot-App.csproj.nuget.dgspec.json
+Robot-App/obj/Robot-App.csproj.nuget.g.props
