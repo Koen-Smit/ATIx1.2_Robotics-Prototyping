@@ -26,13 +26,13 @@ public class CommunicationSystem : IUpdatable
 
     private void MessageCallback(object? sender, SimpleMqttMessage msg)
     {
-        Console.WriteLine($"DEBUG: MQTT message received: topic={msg.Topic}, msg={msg.Message}");
+        // Console.WriteLine($"DEBUG: MQTT message received: topic={msg.Topic}, msg={msg.Message}");
         robot.HandleMessage(msg);
     }
 
     public async Task SendDistanceMeasurement(int distance)
     {
-        Console.WriteLine($"DEBUG: Publishing distance measurement: topic={topicDistance}, msg={distance.ToString()}");
+        // Console.WriteLine($"DEBUG: Publishing distance measurement: topic={topicDistance}, msg={distance.ToString()}");
         await mqttClient.PublishMessage(distance.ToString(), topicDistance);
     }
 

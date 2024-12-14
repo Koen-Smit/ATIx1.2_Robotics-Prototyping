@@ -6,8 +6,12 @@ using System.Diagnostics;
 
 public class CaretakerRobot : IUpdatable
 {
+    private DriveSystem driveSystem;
     private ObstacleDetectionSystem obstacleDetectionSystem;
     private CommunicationSystem communicationSystem;
+    private AlertSystem alertSystem;
+    private Button emergencyStopButton;
+    const int EmergencyStopButtonPinNumber = 6;
     private bool stopped = false;
 
     public CaretakerRobot()
@@ -15,13 +19,21 @@ public class CaretakerRobot : IUpdatable
         Console.WriteLine("DEBUG: CaretakerRobot constructor called");
 
         // Create the ObstacleDetectionSystem objects
+        driveSystem = new DriveSystem();
         obstacleDetectionSystem = new ObstacleDetectionSystem();
+
+        emergencyStopButton = new Button(EmergencyStopButtonPinNumber);
+        alertSystem = new AlertSystem(emergencyStopButton);
+
         communicationSystem = new CommunicationSystem(this);
 
     }
     
     public async Task Init()
     {
+        driveSystem.SpeedStep = 0.025;
+        driveSystem.DriveActive = false;
+
         // Configure the CommunicationSystem
         await communicationSystem.Init();
         
@@ -37,12 +49,38 @@ public class CaretakerRobot : IUpdatable
     {
         // Call all components
         obstacleDetectionSystem.Update();
+        driveSystem.Update();
+        alertSystem.Update();
         communicationSystem.Update();
 
-        // Handle obstacle detection
         int distance = obstacleDetectionSystem.ObstacleDistance;
         await communicationSystem.SendDistanceMeasurement(distance);
         // Console.WriteLine($"DEBUG: Distance {distance} cm");
+        
+        if ((distance < 3 && !stopped) || alertSystem.EmergencyStop)
+        {
+            stopped = true;
+            driveSystem.EmergencyStop();
+        }
+        else if (distance >= 5 && stopped)
+        {
+            stopped = false;
+        }
+
+        if (distance >= 5 && distance < 15)
+        {
+            driveSystem.TargetSpeed = 0.1;
+        }
+        else if (distance >= 15 && distance < 40)
+        {
+            driveSystem.TargetSpeed = 0.2;
+        }
+        else if (distance >= 40)
+        {
+            driveSystem.TargetSpeed = 0.4;
+        }
+        
+        // Console.WriteLine($"DEBUG: Target speed {driveSystem.TargetSpeed}");
     }
 
     public void startup()
