@@ -1,0 +1,28 @@
+{
+    "Sensors": [
+        {
+            "Sensor": "Light-Sensor",
+            "Pin": 0
+        },
+        {
+            "Sensor": "Red-Led Sensor",
+            "Pin": 5
+        },
+        {
+            "Sensor": "Blue-Led Sensor",
+            "Pin": 16
+        },
+        {
+            "Sensor": "Ultrasonic Sensor",
+            "Pin": 18
+        },
+        {
+            "Sensor": "Speaker Sensor",
+            "Pin": 22
+        },
+        {
+            "Sensor": "LCD Sensor",
+            "Pin": "I2C(3)"
+        }
+    ]
+}
