@@ -9,7 +9,7 @@
             "type":"coreclr",
             "request": "launch",
             "program": "/opt/dotnet/dotnet",
-            "args": [ "/media/csprojects/${workspaceFolderBasename}/SimpleRobot.dll" ],
+            "args": [ "/media/csprojects/${workspaceFolderBasename}/Robot-Code.dll" ],
             "cwd": "/media/csprojects/${workspaceFolderBasename}",
             "justMyCode": false,
             "stopAtEntry": false,

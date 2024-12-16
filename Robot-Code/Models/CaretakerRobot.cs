@@ -7,6 +7,7 @@ using System.Diagnostics;
 public class CaretakerRobot : IUpdatable
 {
     private DriveSystem driveSystem;
+    private LcdUser lcdDisplay;
     private ObstacleDetectionSystem obstacleDetectionSystem;
     private CommunicationSystem communicationSystem;
     private AlertSystem alertSystem;
@@ -21,6 +22,7 @@ public class CaretakerRobot : IUpdatable
         // Create the ObstacleDetectionSystem objects
         driveSystem = new DriveSystem();
         obstacleDetectionSystem = new ObstacleDetectionSystem();
+        lcdDisplay = new LcdUser();
 
         emergencyStopButton = new Button(EmergencyStopButtonPinNumber);
         alertSystem = new AlertSystem(emergencyStopButton);
@@ -48,6 +50,7 @@ public class CaretakerRobot : IUpdatable
     public async void Update()
     {
         // Call all components
+        lcdDisplay.Update();
         obstacleDetectionSystem.Update();
         driveSystem.Update();
         alertSystem.Update();

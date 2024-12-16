@@ -700,9 +700,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\SimpleRobot.csproj",
-      "projectName": "SimpleRobot",
-      "projectPath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\SimpleRobot.csproj",
+      "projectUniqueName": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
+      "projectName": "Robot-Code",
+      "projectPath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
       "packagesPath": "C:\\Users\\koens\\.nuget\\packages\\",
       "outputPath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\obj\\",
       "projectStyle": "PackageReference",

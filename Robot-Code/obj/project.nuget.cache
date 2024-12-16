@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1twhP/QhDRs=",
+  "dgSpecHash": "9NVMQUMORMM=",
   "success": true,
-  "projectFilePath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\SimpleRobot.csproj",
+  "projectFilePath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\koens\\.nuget\\packages\\avans.statisticalrobot\\1.0.4\\avans.statisticalrobot.1.0.4.nupkg.sha512",
     "C:\\Users\\koens\\.nuget\\packages\\hivemqtt\\0.24.0\\hivemqtt.0.24.0.nupkg.sha512",

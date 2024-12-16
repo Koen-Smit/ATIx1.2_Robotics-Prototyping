@@ -4,7 +4,7 @@
 		{
 			"type": "statisticalrobot",
 			"projectName": "${workspaceFolderBasename}",
-			"projectFile": "SimpleRobot.csproj",
+			"projectFile": "Robot-Code.csproj",
 			"robotIpAddress": "${command:avans-statisticalrobot.connectedRobotIpAddress}",
 			"robotOutputDir": "/media/csprojects",
 			"problemMatcher": [],

@@ -8,7 +8,7 @@ public class ObstacleDetectionSystem : IUpdatable
     const int ScanIntervalMilliseconds = 500;
 
     private Ultrasonic distanceSensor; // Distance measurement
-    private PeriodTimer scanIntervalTimer;  // New distance measurement is due
+    private PeriodTimer scanIntervalTimer;  // New distance measurement
 
     public int ObstacleDistance { get; private set; } // Distance to obstacle
     
