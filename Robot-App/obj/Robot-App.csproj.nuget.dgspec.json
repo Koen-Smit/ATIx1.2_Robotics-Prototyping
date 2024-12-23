@@ -49,9 +49,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "MQTTnet": {
+            "HiveMQtt": {
               "target": "Package",
-              "version": "[3.0.4, )"
+              "version": "[0.24.0, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.2, )"
             }
           },
           "imports": [

@@ -1,13 +1,34 @@
 using Robot_App.Components;
 using Robot_App.Repositories;
+using SimpleMqtt;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("Connection string 'DefaultConnection' is not found.");
+}
+builder.Services.AddSingleton<IUserRepository>(sp => new SqlUserRepository(connectionString));
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<IUserRepository, SqlUserRepository>(sp => new SqlUserRepository("Server=localhost;Database=RobotApp;User Id=sa;Password=Password123!"));
+
+var simpleMqttClient = new SimpleMqttClient(new()
+{
+    Host = "", 
+    Port = ,
+    ClientId = "",
+    TimeoutInMs = , 
+    UserName = "",
+    Password = ""
+});
+
+
+builder.Services.AddSingleton(simpleMqttClient); 
+builder.Services.AddHostedService<MqttMessageProcessingService>();
 
 var app = builder.Build();
 

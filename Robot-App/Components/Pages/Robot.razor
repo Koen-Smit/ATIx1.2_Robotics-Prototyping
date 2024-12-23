@@ -7,3 +7,66 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app, @Name!
+
+
+<h3>Gebruiker opslaan</h3>
+
+<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="col-sm-6">
+    <div class="form-group mt-2">
+        <label for="inputNaam">Naam</label>
+        <InputText type="text" class="form-control" id="inputNaam" aria-describedby="emailHelp" @bind-Value="@model.Naam" />
+        <ValidationMessage For="@(() => model.Naam)" />
+    </div>
+    <div class="form-group mt-2">
+        <label for="inputLeeftijd">Leeftijd</label>
+        <InputNumber type="number" class="form-control" id="inputLeeftijd" @bind-Value="@model.Leeftijd" />
+         <ValidationMessage For="@(() => model.Leeftijd)" />
+    </div>
+    <div class="form-check mt-2">
+        <InputCheckbox type="checkbox" id="isActief" class="form-check-input" @bind-Value="@model.IsActief"/>
+        <label class="form-check-label" for="isActief">User actief</label>
+        <ValidationMessage For="@(() => model.IsActief)" />
+    </div>
+    <div>
+     <button type="submit" class="btn btn-primary">Gebruiker opslaan</button>
+    </div>
+    </div>
+</EditForm>
+
+@if(isSubmitted)
+{
+    <div class="alert alert-success mt-2" role="alert">
+        Gebruiker opgeslagen
+    </div>
+}
+
+<h3>Gebruikers</h3>
+@if (users != null && users.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Leeftijd</th>
+                <th>Actief</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Age</td>
+                    <td>@user.IsActive</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Geen gebruikers gevonden.</p>
+}
