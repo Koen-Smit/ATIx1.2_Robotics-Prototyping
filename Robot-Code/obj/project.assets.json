@@ -184,190 +184,6 @@
           }
         }
       }
-    },
-    "net8.0/linux-arm64": {
-      "Avans.StatisticalRobot/1.0.4": {
-        "type": "package",
-        "dependencies": {
-          "System.Device.Gpio": "3.2.0"
-        },
-        "compile": {
-          "lib/net8.0/StatisticalRobot-Lib.dll": {}
-        },
-        "runtime": {
-          "lib/net8.0/StatisticalRobot-Lib.dll": {}
-        }
-      },
-      "HiveMQtt/0.24.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.1",
-          "NLog": "5.2.3",
-          "System.IO.Pipelines": "7.0.0",
-          "Websocket.Client": "5.1.2"
-        },
-        "compile": {
-          "lib/net8.0/HiveMQtt.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/HiveMQtt.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "contentFiles": {
-          "contentFiles/any/net8.0/NLog.config": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          }
-        }
-      },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "Microsoft.Extensions.Logging.Abstractions/8.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1"
-        },
-        "compile": {
-          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
-        }
-      },
-      "Microsoft.IO.RecyclableMemoryStream/3.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "NLog/5.2.3": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/NLog.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/NLog.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "System.Device.Gpio/3.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/System.Device.Gpio.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/System.Device.Gpio.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net5.0/System.Device.Gpio.targets": {}
-        }
-      },
-      "System.IO.Pipelines/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net7.0/System.IO.Pipelines.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0/System.IO.Pipelines.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "System.Reactive/6.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/System.Reactive.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/System.Reactive.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "System.Threading.Channels/8.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/System.Threading.Channels.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/System.Threading.Channels.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "Websocket.Client/5.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
-          "Microsoft.IO.RecyclableMemoryStream": "3.0.0",
-          "System.Reactive": "6.0.0",
-          "System.Threading.Channels": "8.0.0"
-        },
-        "compile": {
-          "lib/net8.0/Websocket.Client.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Websocket.Client.dll": {
-            "related": ".xml"
-          }
-        }
-      }
     }
   },
   "libraries": {
@@ -695,24 +511,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\koens\\.nuget\\packages\\": {}
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
+      "projectUniqueName": "C:\\Users\\Dhr Smit\\Documents\\Programming\\Projects\\project folder\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
       "projectName": "Robot-Code",
-      "projectPath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
-      "packagesPath": "C:\\Users\\koens\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\obj\\",
+      "projectPath": "C:\\Users\\Dhr Smit\\Documents\\Programming\\Projects\\project folder\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
+      "packagesPath": "C:\\Users\\Dhr Smit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dhr Smit\\Documents\\Programming\\Projects\\project folder\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\koens\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Dhr Smit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -760,23 +583,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.linux-arm64",
-            "version": "[8.0.8, 8.0.8]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
-      }
-    },
-    "runtimes": {
-      "linux-arm64": {
-        "#import": []
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

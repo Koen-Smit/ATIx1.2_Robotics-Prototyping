@@ -18,11 +18,11 @@ var mqttService = app.Services.GetRequiredService<MqttService>();
 _ = Task.Run(async () =>
 {
     await mqttService.ConnectAsync(
-        host: "your_mqtt_host", // Replace with your MQTT broker's host (e.g., "46132fd...hivemq.cloud")
-        port: 8883,             // Port number
-        clientId: "webapp",     // Client ID
-        username: "your_username", // Replace with your username
-        password: "your_password"  // Replace with your password
+        // host: "your_mqtt_host",
+        // port: 8883,
+        // clientId: "webapp",
+        // username: "your_username",
+        // password: "your_password"
     );
 });
 

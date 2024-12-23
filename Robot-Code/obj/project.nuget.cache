@@ -1,21 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "9NVMQUMORMM=",
+  "dgSpecHash": "LYoWjhjZ0J8mQ08TQYtSA2iGpqI3B28rZgkD6YyiBUtAW4ANgVtrff0FFWeE7lhow6GyKJ1ghvuUgXQ1+8BxjA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\koens\\Documents\\Avans\\Projecten\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
+  "projectFilePath": "C:\\Users\\Dhr Smit\\Documents\\Programming\\Projects\\project folder\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\koens\\.nuget\\packages\\avans.statisticalrobot\\1.0.4\\avans.statisticalrobot.1.0.4.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\hivemqtt\\0.24.0\\hivemqtt.0.24.0.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.1\\microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.0\\microsoft.io.recyclablememorystream.3.0.0.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\nlog\\5.2.3\\nlog.5.2.3.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\system.device.gpio\\3.2.0\\system.device.gpio.3.2.0.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\system.io.pipelines\\7.0.0\\system.io.pipelines.7.0.0.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\websocket.client\\5.1.2\\websocket.client.5.1.2.nupkg.sha512",
-    "C:\\Users\\koens\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm64\\8.0.8\\microsoft.netcore.app.host.linux-arm64.8.0.8.nupkg.sha512"
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\avans.statisticalrobot\\1.0.4\\avans.statisticalrobot.1.0.4.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\hivemqtt\\0.24.0\\hivemqtt.0.24.0.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.1\\microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.0\\microsoft.io.recyclablememorystream.3.0.0.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\nlog\\5.2.3\\nlog.5.2.3.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\system.device.gpio\\3.2.0\\system.device.gpio.3.2.0.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\system.io.pipelines\\7.0.0\\system.io.pipelines.7.0.0.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\websocket.client\\5.1.2\\websocket.client.5.1.2.nupkg.sha512"
   ],
   "logs": []
 }
