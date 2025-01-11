@@ -1,5 +1,4 @@
 using Robot_App.Components;
-using Robot_App.Repositories;
 using SimpleMqtt;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,26 +8,28 @@ if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("Connection string 'DefaultConnection' is not found.");
 }
-builder.Services.AddSingleton<IUserRepository>(sp => new SqlUserRepository(connectionString));
+builder.Services.AddSingleton<IBattery>(sp => new BatteryService(connectionString));
+builder.Services.AddSingleton<ITask>(sp => new TaskService(connectionString));
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-
-var simpleMqttClient = new SimpleMqttClient(new()
+builder.Services.AddSingleton<SimpleMqttClient>(sp => new SimpleMqttClient(new()
 {
-    Host = "", 
-    Port = ,
-    ClientId = "",
-    TimeoutInMs = , 
-    UserName = "",
-    Password = ""
+
+}));
+
+builder.Services.AddHostedService<MqttProcessingService>();
+
+
+builder.Services.AddSingleton<IStop, StopService>(sp =>
+{
+    var mqttClient = SimpleMqttClient.CreateSimpleMqttClientForHiveMQ("Robot-App");
+    return new StopService(mqttClient);
 });
 
-
-builder.Services.AddSingleton(simpleMqttClient); 
-builder.Services.AddHostedService<MqttMessageProcessingService>();
 
 var app = builder.Build();
 
@@ -36,12 +37,10 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
 
