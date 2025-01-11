@@ -16,14 +16,14 @@ public class StopService : IStop
     // Start the robot
     public async Task StartRobot()
     {
-        stopMessage = "gestart";
+        stopMessage = "started";
         await HandleStatus(stopMessage);
     }
 
     // Stop the robot
     public async Task StopRobot()
     {
-        stopMessage = "gestopt";
+        stopMessage = "stopped";
         await HandleStatus(stopMessage);
     }
 
@@ -39,13 +39,13 @@ public class StopService : IStop
                 if (message == "stopped" && robotStatus != "Robot stopped.")
                 {
                     _mqttClient.PublishMessage("stopped", "robot/status");
-                    robotStatus = "Robot gestopt.";
+                    robotStatus = "Robot stopped.";
                 }
                 // Check if the robot is already running
                 else if (message == "started" && robotStatus != "Robot running.")
                 {
                     _mqttClient.PublishMessage("started", "robot/status");
-                    robotStatus = "Robot draait.";
+                    robotStatus = "Robot running.";
                 }
             }
         });

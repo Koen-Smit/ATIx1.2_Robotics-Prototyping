@@ -87,17 +87,20 @@ public class SimpleMqttClient : IDisposable
 
     ~SimpleMqttClient() => _client.Dispose();
 
-    public static SimpleMqttClient CreateSimpleMqttClientForHiveMQ(string clientId)
+    public static SimpleMqttClient CreateSimpleMqttClientForHiveMQ(string clientId, IConfiguration configuration)
     {
+        // Retrieve MQTT connection settings from configuration
+        var mqttConfig = configuration.GetSection("MqttConnection").Get<MqttConfig>();
+
         var mqttWrapper = new SimpleMqttClient(new()
         {
-            Host = "6bf2613462514a79bf06928b93d37bcc.s1.eu.hivemq.cloud",
-            Port = 8883,
-            CleanStart = false, 
-            ClientId = clientId, 
-            TimeoutInMs = 5_000, 
-            UserName = "hivemq.webclient.1732789978578",
-            Password = "*0pr?$ks7GXDA6ewF1.T"
+            Host = mqttConfig!.Host,
+            Port = mqttConfig.Port,
+            CleanStart = false,
+            ClientId = clientId,
+            TimeoutInMs = mqttConfig.TimeoutInMs,
+            UserName = mqttConfig.UserName,
+            Password = mqttConfig.Password
         });
 
         return mqttWrapper;

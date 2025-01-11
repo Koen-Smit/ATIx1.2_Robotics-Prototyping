@@ -11,6 +11,7 @@ namespace Robot_App.Components.Pages
         [Inject]
         public ITask? TaskService { get; set; }
         private bool isTaskAdded = false;
+        private TaskType taskType = new TaskType();
 
         protected override async Task OnInitializedAsync()
         {
@@ -34,5 +35,11 @@ namespace Robot_App.Components.Pages
             await TaskService!.InsertTaskType(taskType);
             taskType = new TaskType();
         }
+
+        private void RefreshPage()
+        {
+            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+        }
+
     }
 }

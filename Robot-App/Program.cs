@@ -16,17 +16,31 @@ builder.Services.AddSingleton<ITask>(sp => new TaskService(connectionString));
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<SimpleMqttClient>(sp => new SimpleMqttClient(new()
+builder.Services.AddSingleton<SimpleMqttClient>(sp =>
 {
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var mqttConfig = configuration.GetSection("MqttConnection").Get<MqttConfig>();
 
-}));
+    return new SimpleMqttClient(new()
+    {
+        Host = mqttConfig!.Host,
+        Port = mqttConfig.Port,
+        ClientId = mqttConfig.ClientId,
+        TimeoutInMs = mqttConfig.TimeoutInMs,
+        UserName = mqttConfig.UserName,
+        Password = mqttConfig.Password
+    });
+});
 
 builder.Services.AddHostedService<MqttProcessingService>();
 
 
 builder.Services.AddSingleton<IStop, StopService>(sp =>
 {
-    var mqttClient = SimpleMqttClient.CreateSimpleMqttClientForHiveMQ("Robot-App");
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var mqttConfig = configuration.GetSection("MqttConnection").Get<MqttConfig>();
+
+    var mqttClient = SimpleMqttClient.CreateSimpleMqttClientForHiveMQ("Robot-App", configuration);
     return new StopService(mqttClient);
 });
 
