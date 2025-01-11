@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "LYoWjhjZ0J8mQ08TQYtSA2iGpqI3B28rZgkD6YyiBUtAW4ANgVtrff0FFWeE7lhow6GyKJ1ghvuUgXQ1+8BxjA==",
+  "dgSpecHash": "smSwaaknPTQbzJt2gLIrbtuwT4j/Ts6393gL3dmYYVL+zRdi5qidNkgvBA0VXoXdUL2Vd1IP8X9drSURP67tAA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Dhr Smit\\Documents\\Programming\\Projects\\project folder\\ATIx1.2-Robotics-Prototyping-2024-25-P2\\Robot-Code\\Robot-Code.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Dhr Smit\\.nuget\\packages\\avans.statisticalrobot\\1.0.4\\avans.statisticalrobot.1.0.4.nupkg.sha512",
+    "C:\\Users\\Dhr Smit\\.nuget\\packages\\avans.statisticalrobot\\1.1.7\\avans.statisticalrobot.1.1.7.nupkg.sha512",
     "C:\\Users\\Dhr Smit\\.nuget\\packages\\hivemqtt\\0.24.0\\hivemqtt.0.24.0.nupkg.sha512",
     "C:\\Users\\Dhr Smit\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\Dhr Smit\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.1\\microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",

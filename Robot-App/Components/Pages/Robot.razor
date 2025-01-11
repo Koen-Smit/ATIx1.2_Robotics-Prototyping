@@ -4,69 +4,85 @@
 
 <PageTitle>Robot</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app, @Name!
 
 
-<h3>Gebruiker opslaan</h3>
+<div class="card battery-card top-0 end-0 m-3 shadow">
+    <div class="card-body p-3">
+        <h5 class="card-title">Batterij en status</h5>
+        
+        @* ==================================================={ BATTERY }===================================================*@  
+        @if (BatteryService!.batteries != null && BatteryService.batteries.Any()) 
+        {
+            foreach (var battery in BatteryService.batteries)
+            {
+                <div class="battery-container">
+                    <div class="battery" @onclick="BatteryService!.LoadBatteries" style="cursor: pointer;">
+                        <div class="battery-fill" 
+                            style="width: @Math.Min(battery.Percentage, 100)%; background-color: @(BatteryService?.GetBatteryColor(battery.Percentage) ?? "gray");">
+                            <span class="battery-percentage">@Math.Min(BatteryService!.batteries[0].Percentage, 100)%</span>
+                        </div>
+                    </div>
+                    <span class="battery-name">Laatste batterij update: @battery.Timestamp.ToString("HH:mm")</span>
+                </div>
+            }
+        }
+        else
+        {
+            <button class="btn battery-placeholder" @onclick="BatteryService!.LoadBatteries" title="Load Battery Status">Load battery status</button>
+        }
+        
+        @* ==================================================={ STOP-BUTTON }===================================================*@
+        <div class="mt-4">
+            @if (StopService!.robotStatus == "Robot stopped.")
+            {
+                <!-- Render the Start Robot button if the robot is stopped -->
+                <button class="btn btn-success" @onclick="StopService.StartRobot" title="Start de robot">
+                    Start Robot
+                </button>
+            }
+            else
+            {
+                <!-- Render the Stop Robot button if the robot is running -->
+                <button class="btn btn-danger" @onclick="StopService.StopRobot" title="Stop de robot">
+                    Stop Robot
+                </button>
+            }
 
-<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+            @if (!string.IsNullOrEmpty(StopService.robotStatus))
+            {
+                <p>Status: @StopService.robotStatus</p>
+            }
+            else
+            {
+                <p>Status: Robot draait.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@* ==================================================={ TASK FORM }===================================================*@
+<h5 class="mt-4">Voeg een nieuwe taak toe</h5>
+
+<EditForm Model="taskType" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="col-sm-6">
-    <div class="form-group mt-2">
-        <label for="inputNaam">Naam</label>
-        <InputText type="text" class="form-control" id="inputNaam" aria-describedby="emailHelp" @bind-Value="@model.Naam" />
-        <ValidationMessage For="@(() => model.Naam)" />
+
+    <div class="form-group">
+        <label for="taskName">Taaknaam</label>
+        <InputText id="taskName" class="form-control" @bind-Value="taskType.TypeName" />
     </div>
-    <div class="form-group mt-2">
-        <label for="inputLeeftijd">Leeftijd</label>
-        <InputNumber type="number" class="form-control" id="inputLeeftijd" @bind-Value="@model.Leeftijd" />
-         <ValidationMessage For="@(() => model.Leeftijd)" />
+
+    <div class="form-group">
+        <label for="taskDescription">Taakbeschrijving</label>
+        <InputTextArea id="taskDescription" class="form-control" @bind-Value="taskType.Description" />
     </div>
-    <div class="form-check mt-2">
-        <InputCheckbox type="checkbox" id="isActief" class="form-check-input" @bind-Value="@model.IsActief"/>
-        <label class="form-check-label" for="isActief">User actief</label>
-        <ValidationMessage For="@(() => model.IsActief)" />
-    </div>
-    <div>
-     <button type="submit" class="btn btn-primary">Gebruiker opslaan</button>
-    </div>
-    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Taak toevoegen</button>
 </EditForm>
 
-@if(isSubmitted)
+@if (isTaskAdded)
 {
-    <div class="alert alert-success mt-2" role="alert">
-        Gebruiker opgeslagen
+    <div class="alert alert-success mt-3">
+        Taak type succesvol toegevoegd!
     </div>
-}
-
-<h3>Gebruikers</h3>
-@if (users != null && users.Count > 0)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Leeftijd</th>
-                <th>Actief</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in users)
-            {
-                <tr>
-                    <td>@user.Name</td>
-                    <td>@user.Age</td>
-                    <td>@user.IsActive</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Geen gebruikers gevonden.</p>
 }

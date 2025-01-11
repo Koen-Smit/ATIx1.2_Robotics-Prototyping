@@ -90,7 +90,7 @@ public class CaretakerRobot : IUpdatable
     {
         // display version and build timestamp
         FileVersionInfo vi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
-        FileInfo fileInfo = new System.IO.FileInfo(vi.FileName);
+        FileInfo fileInfo = new FileInfo(vi.FileName);
         DateTime createTime = fileInfo.CreationTime;
         Console.WriteLine($"SimpleRobot started (v{vi.FileVersion} @ {createTime}) ");
         Robot.PlayNotes("g>g");
