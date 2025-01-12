@@ -1,10 +1,6 @@
-using System.Drawing;
 using Avans.StatisticalRobot;
 
-CaretakerRobot robot = new CaretakerRobot();
-robot.startup();
-
-RGBSensor rgbSensor = new RGBSensor();
+FZHRobot robot = new FZHRobot();
 
 while (true)
 {

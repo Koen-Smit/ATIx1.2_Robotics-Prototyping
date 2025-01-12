@@ -18,10 +18,9 @@ public class SimpleMqttClient : IDisposable
 
         _client = new HiveMQClient(new()
         {
-            ClientId = options.ClientId,
-            CleanStart = options.CleanStart,
-            Port = options.Port,
             Host = options.Host!,
+            ClientId = options.ClientId,
+            Port = options.Port,
             ConnectTimeoutInMs = options.TimeoutInMs,
             UserName = options.UserName,
             Password = options.Password
@@ -91,21 +90,54 @@ public class SimpleMqttClient : IDisposable
 
     ~SimpleMqttClient() => _client.Dispose();
 
+
     public static SimpleMqttClient CreateSimpleMqttClientForHiveMQ(string clientId)
     {
-        var mqttWrapper = new SimpleMqttClient(new()
-        {
-            Host = "6bf2613462514a79bf06928b93d37bcc.s1.eu.hivemq.cloud", // Uses the public HiveMQ MQTT broker for this quick demo
-            Port = 8883,
-            CleanStart = false, // <--- false, haalt al gebufferde meldingen ook op.
-            ClientId = clientId, // Dit clientid moet uniek zijn binnen de broker
-            TimeoutInMs = 5_000, // Standaard time-out bij het maken van een verbinding (5 seconden)
-            UserName = "hivemq.webclient.1732789978578", // Public HiveMQ MQTT broker doesn't request a username and password
-            Password = "*0pr?$ks7GXDA6ewF1.T"
-        });
+        // Define file path for easier debugging
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
 
-        return mqttWrapper;
+        // Check if the file exists
+        if (!File.Exists(filePath))
+        {
+            throw new FileNotFoundException($"Configuration file not found at {filePath}");
+        }
+
+        // Attempt to read and deserialize the file as a JsonObject
+        var json = File.ReadAllText(filePath);
+        using var jsonDocument = JsonDocument.Parse(json);
+        var jsonObject = jsonDocument.RootElement;
+
+        // Extract properties from the nested "MqttConnection" object
+        if (!jsonObject.TryGetProperty("MqttConnection", out var mqttConnection))
+        {
+            throw new InvalidOperationException("MqttConnection section not found in configuration.");
+        }
+
+        // Extract individual properties from the MqttConnection
+        if (!mqttConnection.TryGetProperty("Host", out var host) || string.IsNullOrEmpty(host.GetString()))
+        {
+            throw new InvalidOperationException("Host not found in the MqttConnection configuration.");
+        }
+
+        var port = mqttConnection.GetProperty("Port").GetInt32();
+        var clientIdConfig = mqttConnection.GetProperty("ClientId").GetString();
+        var timeoutInMs = mqttConnection.GetProperty("TimeoutInMs").GetInt32();
+        var userName = mqttConnection.GetProperty("UserName").GetString();
+        var password = mqttConnection.GetProperty("Password").GetString();
+
+        // Create and return the MQTT client
+        return new SimpleMqttClient(new()
+        {
+            Host = host.GetString(),
+            Port = port,
+            ClientId = clientId,
+            TimeoutInMs = timeoutInMs,
+            UserName = userName,
+            Password = password
+        });
     }
+
+
 }
 
 public class SimpleMqttClientConfiguration

@@ -65,3 +65,7 @@ Robot-App/obj/Robot-App.csproj.nuget.g.props
 Robot-Code/Models/SimpleMqttClient.cs
 /Robot-Code/Assets/Secret
 Robot-App/placeholder.program.cs
+Robot-Code/Models/Robot/Mqtt/Startup/AppSettings.cs
+Robot-Code/appsettings.json
+Robot-Code/bin/Debug/net8.0/appsettings.json
+Robot-Code/bin/Debug/robot/appsettings.json
