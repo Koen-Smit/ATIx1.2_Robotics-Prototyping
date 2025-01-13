@@ -34,7 +34,7 @@ public class TaskTypeList : IUpdatable
                 "Eten",
                 "Rust nemen",
                 "Wandelen",
-                "Hygiëne",
+                "Hygiene",
                 "Praten met familie",
                 "Kleding veranderen",
                 "Naar de dokter gaan",
