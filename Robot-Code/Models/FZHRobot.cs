@@ -66,6 +66,7 @@ public class FZHRobot : IUpdatable
             else if (msg.Message == "started")
             {
                 Console.WriteLine("Robot started");
+                _display.SetValue(""); // Clear the display
                 mqttStop = false;
             }
             else if (msg.Message == "update")
@@ -129,7 +130,7 @@ public class FZHRobot : IUpdatable
                 // Update obstacle detection
                 _obstacleDetection.Update(distance);
 
-                
+
                 // }
             }
         }
