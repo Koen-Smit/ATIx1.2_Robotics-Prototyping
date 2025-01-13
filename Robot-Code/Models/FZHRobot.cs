@@ -13,11 +13,11 @@ public class FZHRobot : IUpdatable
     private readonly ButtonSystem _button;
     private readonly ObstacleDetection _obstacleDetection;
     private readonly Communication _communication;
+    private readonly TaskTypeList _taskTypeList;
     bool mqttStop = false; // MQTT stop signal
     private bool mqttStopCount = false; // Robot standBy
     private bool standBy = true; // Robot standBy
-
-
+    private int _delay = 20; // Task delay in seconds
 
     // Constructor to initialize the components
     public FZHRobot()
@@ -33,6 +33,7 @@ public class FZHRobot : IUpdatable
         _button = new ButtonSystem();
         _obstacleDetection = new ObstacleDetection(_drive, _distance);
         _communication = new Communication(this);
+        _taskTypeList = new TaskTypeList(_button, _display, _communication, _delay);
 
         Init().Wait();
     }
@@ -43,13 +44,14 @@ public class FZHRobot : IUpdatable
         _drive.SpeedStep = 0.025;
         _drive.DriveActive = false;
         _drive.EmergencyStop();
+        _display.SetValue(""); // Clear the display
 
         // Initialize communication system
         await _communication.Init();
         
         Console.WriteLine("DEBUG: FZHRobot Init() finished");
     }
-    
+
     // Handle received MQTT messages
     public void HandleMessage(SimpleMqttMessage msg)
     {
@@ -66,11 +68,16 @@ public class FZHRobot : IUpdatable
                 Console.WriteLine("Robot started");
                 mqttStop = false;
             }
+            else if (msg.Message == "update")
+            {
+                Console.WriteLine("Robot battery send");
+                _communication.Update();
+            }
         }
     }
 
     // Update all components and handle logic
-    public async void Update()
+    public void Update()
     {
         // if stop signal is received through mqtt, stop the robot
         if(mqttStop)
@@ -100,12 +107,20 @@ public class FZHRobot : IUpdatable
             if (standBy)
             {
                 _drive.EmergencyStop();
-                // every 20 sec show task
-
-                
+                _taskTypeList.Update();
             }
             else
             {
+          
+                // if ()
+                // {
+                //     _drive.EmergencyStop();
+                //     _taskTypeList.Update();
+                // }
+                // else
+                // {
+
+
                 // Update all systems
                 _distance.Update();
                 _drive.Update();
@@ -113,8 +128,10 @@ public class FZHRobot : IUpdatable
                 
                 // Update obstacle detection
                 _obstacleDetection.Update(distance);
+
+                
+                // }
             }
         }
     }
-
 }

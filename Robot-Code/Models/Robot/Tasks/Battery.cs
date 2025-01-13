@@ -5,8 +5,8 @@ using Avans.StatisticalRobot.Interfaces;
 public class Battery : IUpdatable
 {
     private const int NumberOfBatteries = 6;
-    private const int MinPerBattery = 100; // Minimum for each battery
-    private const int MaxPerBattery = 4200; // Maximum for each battery
+    private const int MinPerBattery = 100; // Minimum mV for each battery
+    private const int MaxPerBattery = 1500; // Maximum mV for each battery
 
     public Battery()
     {

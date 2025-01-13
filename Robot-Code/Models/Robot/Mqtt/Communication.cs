@@ -4,17 +4,19 @@ using SimpleMqtt;
 
 public class Communication : IUpdatable
 {
+    private readonly Battery _battery;
     // Define topics as constants
     private const string TopicDistance = "robot/distance";
     private const string TopicStatus = "robot/status";
     private const string TopicBattery = "robot/battery";
-    private const string TopicTask = "robot/task";
+    public const string TopicTask = "robot/task";
 
     private readonly SimpleMqttClient _mqttClient;
     private readonly FZHRobot _robot;
 
     public Communication(FZHRobot robot)
     {
+        _battery = new Battery();
         _robot = robot ?? throw new ArgumentNullException(nameof(robot));
         _mqttClient = SimpleMqttClient.CreateSimpleMqttClientForHiveMQ(GetClientId());
         _mqttClient.OnMessageReceived += OnMessageReceived;
@@ -50,15 +52,21 @@ public class Communication : IUpdatable
         await _mqttClient.PublishMessage(message, topic);
     }
 
-    // Example of how to send distance measurement (uses PublishMessageToTopic internally)
-    public async Task SendDistanceMeasurement(int distance)
+    // Send battery measurement
+    public async Task SendBatteryMeasurement(int _batteryPercentage)
     {
-        // await PublishMessageToTopic(TopicDistance, distance.ToString());
+        await PublishMessageToTopic(TopicBattery, _batteryPercentage.ToString());
     }
 
-    public void Update()
+    // Send tasktype
+    public async Task SendTaskType(int number)
     {
-        // No updates required in this method
+        await PublishMessageToTopic(TopicTask, number.ToString());
+    }
+
+    public async void Update()
+    {
+        await SendBatteryMeasurement(_battery.GetValue());
     }
 
     // Helper method to generate client ID

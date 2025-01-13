@@ -118,7 +118,7 @@ public class ButtonSystem : IUpdatable
         if (GetBlueButtonState() == "Pressed")
         {
             Console.WriteLine("DEBUG: Blue button pressed!");
-            ToggleLed(blueLed);
+            // ToggleLed(blueLed);
         }
     }
 }
