@@ -3,122 +3,134 @@
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
 
-<PageTitle>Robot</PageTitle>
+<PageTitle>Robot Control</PageTitle>
 
-
-
-<div class="card battery-card top-0 end-0 m-3 shadow">
-    <div class="card-body p-3">
-        <h5 class="card-title">Robot status</h5>
-        @* ==================================================={ BATTERY }===================================================*@  
-        @if (BatteryService!.batteries != null && BatteryService.batteries.Any()) 
-        {
-            foreach (var battery in BatteryService.batteries)
-            {
-                <div class="battery-container">
-                    <div class="battery" @onclick="BatteryService!.LoadBatteries" style="cursor: pointer;">
-                        <div class="battery-fill" 
-                            style="width: @Math.Min(battery.Percentage, 100)%; background-color: @(BatteryService?.GetBatteryColor(battery.Percentage) ?? "gray");">
-                            <span class="battery-percentage">@Math.Min(BatteryService!.batteries[0].Percentage, 100)%</span>
-                        </div>
-                    </div>
-                    <span class="battery-name">Laatste batterij update: @battery.Timestamp.ToString("HH:mm")</span>
+<div class="container mt-4">
+    <div class="row">
+        <!-- Battery Status Card -->
+        <div class="col-md-4">
+            <div class="card battery-card shadow-lg">
+                <div class="card-body p-4">
+                    <h5 class="card-title text-center">Robot Battery</h5>
+                    @if (BatteryService!.batteries != null && BatteryService.batteries.Any())
+                    {
+                        foreach (var battery in BatteryService.batteries)
+                        {
+                            <div class="battery-container">
+                                <div class="battery" @onclick="BatteryService!.LoadBatteries">
+                                    <div class="battery-fill"
+                                        style="width: @Math.Min(battery.Percentage, 100)%; background-color: @(BatteryService?.GetBatteryColor(battery.Percentage) ?? "gray");">
+                                        <span class="battery-percentage">@Math.Min(battery.Percentage, 100)%</span>
+                                    </div>
+                                </div>
+                                <span class="battery-name">Laatste update: @battery.Timestamp.ToString("HH:mm")</span>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline-primary w-100" @onclick="BatteryService!.LoadBatteries" title="Load Battery Status">
+                            <i class="bi bi-arrow-clockwise"></i> Load Battery Status
+                        </button>
+                    }
                 </div>
-            }
+            </div>
+        </div>
+
+        <!-- Robot Control Card -->
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h5 class="card-title text-center">Robot Control</h5>
+
+                    <div class="d-flex justify-content-center mt-3">
+                        @if (StopService!.robotStatus == "Robot stopped.")
+                        {
+                            <button class="btn btn-success btn-lg" @onclick="StopService.StartRobot" title="Start Robot">
+                                <i class="bi bi-play-circle"></i> Start Robot
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger btn-lg" @onclick="StopService.StopRobot" title="Stop Robot">
+                                <i class="bi bi-stop-circle"></i> Stop Robot
+                            </button>
+                        }
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(StopService.robotStatus))
+                    {
+                        <p class="mt-3 text-center text-muted">Status: @StopService.robotStatus</p>
+                    }
+                    else
+                    {
+                        <p class="mt-3 text-center text-muted">Status: Robot is running.</p>
+                    }
+
+                    <div class="d-flex justify-content-center mt-3">
+                        <button class="btn btn-outline-secondary" title="Refresh" @onclick="RefreshPage">
+                            <i class="bi bi-arrow-clockwise"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Form -->
+    <h5 class="mt-5">Add a New Task</h5>
+    <EditForm Model="taskType" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="taskName">Task Name</label>
+            <InputText id="taskName" class="form-control" @bind-Value="taskType.TypeName" />
+        </div>
+
+        <div class="form-group">
+            <label for="taskDescription">Task Description</label>
+            <InputTextArea id="taskDescription" class="form-control" @bind-Value="taskType.Description" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Add Task</button>
+    </EditForm>
+
+    @if (isTaskAdded)
+    {
+        <div class="alert alert-success mt-3">
+            Task added successfully!
+        </div>
+    }
+
+    <!-- Task List Table -->
+    <h5 class="mt-4">Task List</h5>
+    <div class="table-responsive">
+        @if (TaskService!.tasks != null && TaskService.tasks.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in TaskService.tasks)
+                    {
+                        <tr>
+                            <td>@task.TaskTypeName</td>
+                            <td>@task.TaskTypeDescription</td>
+                            <td>@task.PressedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
         else
         {
-            <button class="btn battery-placeholder" @onclick="BatteryService!.LoadBatteries" title="Load Battery Status">Load battery status</button>
+            <p>No tasks found.</p>
         }
-        
-        @* ==================================================={ STOP-BUTTON }===================================================*@
-        <div class="mt-4">
-            @if (StopService!.robotStatus == "Robot stopped.")
-            {
-                <!-- Render the Start Robot button if the robot is stopped -->
-                <button class="btn btn-success" @onclick="StopService.StartRobot" title="Start de robot">
-                    Start Robot
-                </button>
-            }
-            else
-            {
-                <!-- Render the Stop Robot button if the robot is running -->
-                <button class="btn btn-danger" @onclick="StopService.StopRobot" title="Stop de robot">
-                    Stop Robot
-                </button>
-            }
-
-            @if (!string.IsNullOrEmpty(StopService.robotStatus))
-            {
-                <p>Status: @StopService.robotStatus</p>
-            }
-            else
-            {
-                <p>Status: Robot draait.</p>
-            }
-        </div>
-        <button class="border-0 refresh-button ms-2" title="Refresh" @onclick="RefreshPage">
-            <i class="bi bi-arrow-clockwise"></i>
-        </button>
     </div>
 </div>
-
-@* ==================================================={ TASK FORM }===================================================*@
-<h5 class="mt-4">Voeg een nieuwe taak toe</h5>
-
-<EditForm Model="taskType" OnValidSubmit="HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label for="taskName">Taaknaam</label>
-        <InputText id="taskName" class="form-control" @bind-Value="taskType.TypeName" />
-    </div>
-
-    <div class="form-group">
-        <label for="taskDescription">Taakbeschrijving</label>
-        <InputTextArea id="taskDescription" class="form-control" @bind-Value="taskType.Description" />
-    </div>
-
-    <button type="submit" class="btn btn-primary mt-3">Taak toevoegen</button>
-</EditForm>
-
-@if (isTaskAdded)
-{
-    <div class="alert alert-success mt-3">
-        Taak type succesvol toegevoegd!
-    </div>
-}
-
-
-@* table with TaskService.tasks *@
-<h5 class="mt-4">Taken</h5>
-<button class="border-0 refresh-button ms-2" title="Refresh" @onclick="RefreshPage">
-    <i class="bi bi-arrow-clockwise"></i>
-</button>
-@if (TaskService!.tasks != null && TaskService.tasks.Any())
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Beschrijving</th>
-                <th>plaatsgevonden op</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var task in TaskService.tasks)
-            {
-                <tr>
-                    <td>@task.TaskTypeName</td>
-                    <td>@task.TaskTypeDescription</td>
-                    <td>@task.PressedAt.ToString("dd-MM-yyyy HH:mm")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Geen taken gevonden.</p>
-}
