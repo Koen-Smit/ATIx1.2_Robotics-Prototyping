@@ -55,14 +55,16 @@ VALUES
 
 -- JOIN query voorbeeld
 SELECT 
-    t.[ID] AS TaskID,
-    t.[PressedAt],
-    t.[Status],
-    tt.[TypeName] AS TaskType,
-    tt.[Description] AS TaskTypeDescription
+t.[ID] AS TaskID,
+t.[PressedAt],
+t.[Status],
+t.[TaskTypeID],
+tt.[TypeName] AS TaskTypeName,
+tt.[Description] AS TaskTypeDescription
 FROM 
-    [dbo].[Task] t
+[dbo].[TaskList] t
 JOIN 
-    [dbo].[TaskType] tt ON t.[TaskTypeID] = tt.[ID]
+[dbo].[TaskType] tt ON t.[TaskTypeID] = tt.[ID]
 ORDER BY 
-    t.[PressedAt] DESC;
+CAST(t.[PressedAt] AS DATE) DESC, 
+CAST(t.[PressedAt] AS TIME) DESC

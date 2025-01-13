@@ -1,13 +1,16 @@
 using Microsoft.Data.SqlClient;
-
+using SimpleMqtt;
 public class BatteryService : IBattery
 {
+    private readonly SimpleMqttClient _mqttClient;
     private readonly string _connectionString;
     public List<Battery> batteries { get; set; }
-    public BatteryService(string connectionString)
+    public BatteryService(string connectionString, SimpleMqttClient mqttClient)
     {
         _connectionString = connectionString;
         batteries = new List<Battery>();
+        _mqttClient = mqttClient;
+
     }
 
     //get battery percentage from mqtt
@@ -99,6 +102,8 @@ public class BatteryService : IBattery
     {
         try
         {
+            await _mqttClient.PublishMessage("update", "robot/status");
+
             // Wait for 500ms to ensure battery data is updated, then get battery data
             await Task.Delay(500);
             batteries = GetBattery();

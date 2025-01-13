@@ -8,7 +8,6 @@ if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("Connection string 'DefaultConnection' is not found.");
 }
-builder.Services.AddSingleton<IBattery>(sp => new BatteryService(connectionString));
 builder.Services.AddSingleton<ITask>(sp => new TaskService(connectionString));
 
 
@@ -44,6 +43,14 @@ builder.Services.AddSingleton<IStop, StopService>(sp =>
     return new StopService(mqttClient);
 });
 
+builder.Services.AddSingleton<IBattery, BatteryService>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var mqttConfig = configuration.GetSection("MqttConnection").Get<MqttConfig>();
+
+    var mqttClient = SimpleMqttClient.CreateSimpleMqttClientForHiveMQ("Robot-App", configuration);
+    return new BatteryService(connectionString, mqttClient);
+});
 
 var app = builder.Build();
 

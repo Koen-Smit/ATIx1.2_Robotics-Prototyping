@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Robot-App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecf25546563c43aa97e0871d6950c5db873ee179")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f1582e221563ff0cf7172a34f54f28f8d66e1489")]
 [assembly: System.Reflection.AssemblyProductAttribute("Robot-App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Robot-App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -89,3 +89,36 @@
         Taak type succesvol toegevoegd!
     </div>
 }
+
+
+@* table with TaskService.tasks *@
+<h5 class="mt-4">Taken</h5>
+<button class="border-0 refresh-button ms-2" title="Refresh" @onclick="RefreshPage">
+    <i class="bi bi-arrow-clockwise"></i>
+</button>
+@if (TaskService!.tasks != null && TaskService.tasks.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Beschrijving</th>
+                <th>plaatsgevonden op</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in TaskService.tasks)
+            {
+                <tr>
+                    <td>@task.TaskTypeName</td>
+                    <td>@task.TaskTypeDescription</td>
+                    <td>@task.PressedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Geen taken gevonden.</p>
+}
