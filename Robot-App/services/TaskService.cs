@@ -4,10 +4,13 @@ public class TaskService : ITask
 {
     private readonly string _connectionString;
     public List<TaskList> tasks { get; set; }
+    public List<TaskType> taskTypes { get; set; }
+
     public TaskService(string connectionString)
     {
         _connectionString = connectionString;
         tasks = new List<TaskList>();
+        taskTypes = new List<TaskType>();
     }
 
     // Insert task into database
@@ -110,6 +113,93 @@ public class TaskService : ITask
     public List<TaskList> GetTasks()
     {
         return tasks;
+    }
+
+    // Get tasktype
+    public List<TaskType> GetTaskTypes()
+    {
+        try
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT [ID], [TypeName], [Description] FROM [TaskType]";
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            taskTypes.Add(new TaskType
+                            {
+                                Id = reader.GetInt32(0),
+                                TypeName = reader.GetString(1),
+                                Description = reader.GetString(2)
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error getting tasktypes: {ex.Message}");
+        }
+        return taskTypes;
+    }
+
+    // Load tasktypes
+    public async Task LoadTaskTypes()
+    {
+        try
+        {
+            await using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+            await using var command = connection.CreateCommand();
+            command.CommandText = "SELECT [ID], [TypeName], [Description] FROM [TaskType]";
+
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                tasks.Add(new TaskList
+                {
+                    TaskType = new TaskType
+                    {
+                        Id = reader.GetInt32(0),
+                        TypeName = reader.GetString(1),
+                        Description = reader.GetString(2)
+                    }
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading tasktypes: {ex.Message}");
+        }
+    }
+
+    //RemoveTaskType
+    public async Task RemoveTaskType(int id)
+    {
+        try
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "DELETE FROM [TaskType] WHERE [ID] = @ID";
+                    command.Parameters.AddWithValue("@ID", id);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error removing tasktype: {ex.Message}");
+        }
     }
 
     // Get task from mqtt

@@ -5,34 +5,53 @@
 
 <PageTitle>Robot Control</PageTitle>
 
+<div class="banner text-center text-white py-4 mb-4">
+    <h1 class="display-4">FZH-Robot Applicatie</h1>
+</div>
+
+<style>
+    .banner {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: white;
+    }
+</style>
 <div class="container mt-4">
     <div class="row">
         <!-- Battery Status Card -->
         <div class="col-md-4">
             <div class="card battery-card shadow-lg">
-                <div class="card-body p-4">
-                    <h5 class="card-title text-center">Robot Battery</h5>
-                    @if (BatteryService!.batteries != null && BatteryService.batteries.Any())
-                    {
-                        foreach (var battery in BatteryService.batteries)
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Batterij</h5>
+                    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#batteryCollapse" aria-expanded="true" aria-controls="batteryCollapse">
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+                <div id="batteryCollapse" class="collapse show">
+                    <div class="card-body p-4">
+                        @if (BatteryService!.batteries != null && BatteryService.batteries.Any())
                         {
-                            <div class="battery-container">
-                                <div class="battery" @onclick="BatteryService!.LoadBatteries">
-                                    <div class="battery-fill"
-                                        style="width: @Math.Min(battery.Percentage, 100)%; background-color: @(BatteryService?.GetBatteryColor(battery.Percentage) ?? "gray");">
-                                        <span class="battery-percentage">@Math.Min(battery.Percentage, 100)%</span>
+                            foreach (var battery in BatteryService.batteries)
+                            {
+                                <div class="battery-container">
+                                    <div class="battery" @onclick="BatteryService!.LoadBatteries">
+                                        <div class="battery-fill"
+                                            style="width: @Math.Min(battery.Percentage, 100)%; background-color: @(BatteryService?.GetBatteryColor(battery.Percentage) ?? "gray");">
+                                            <span class="battery-percentage">@Math.Min(battery.Percentage, 100)%</span>
+                                        </div>
                                     </div>
+                                    <span class="battery-name">Laatste update: @battery.Timestamp.ToString("HH:mm")</span>
                                 </div>
-                                <span class="battery-name">Laatste update: @battery.Timestamp.ToString("HH:mm")</span>
-                            </div>
+                            }
                         }
-                    }
-                    else
-                    {
-                        <button class="btn btn-outline-primary w-100" @onclick="BatteryService!.LoadBatteries" title="Load Battery Status">
-                            <i class="bi bi-arrow-clockwise"></i> Load Battery Status
-                        </button>
-                    }
+                        else
+                        {
+                            <button class="btn btn-outline-primary w-100" @onclick="BatteryService!.LoadBatteries" title="Load Battery Status">
+                                <i class="bi bi-arrow-clockwise"></i> Batterij Status laden...
+                            </button>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,80 +59,66 @@
         <!-- Robot Control Card -->
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-body p-4">
-                    <h5 class="card-title text-center">Robot Control</h5>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Beheer robot</h5>
+                    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#robotControlCollapse" aria-expanded="true" aria-controls="robotControlCollapse">
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+                <div id="robotControlCollapse" class="collapse show">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-center mt-3">
+                            @if (StopService!.robotStatus == "Robot stopped.")
+                            {
+                                <button class="btn btn-success btn-lg" @onclick="StopService.StartRobot" title="Start Robot">
+                                    <i class="bi bi-play-circle"></i> Start Robot
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger btn-lg" @onclick="StopService.StopRobot" title="Stop Robot">
+                                    <i class="bi bi-stop-circle"></i> Stop Robot
+                                </button>
+                            }
+                        </div>
 
-                    <div class="d-flex justify-content-center mt-3">
-                        @if (StopService!.robotStatus == "Robot stopped.")
+                        @if (!string.IsNullOrEmpty(StopService.robotStatus))
                         {
-                            <button class="btn btn-success btn-lg" @onclick="StopService.StartRobot" title="Start Robot">
-                                <i class="bi bi-play-circle"></i> Start Robot
-                            </button>
+                            <p class="mt-3 text-center text-muted">Status: @StopService.robotStatus</p>
                         }
                         else
                         {
-                            <button class="btn btn-danger btn-lg" @onclick="StopService.StopRobot" title="Stop Robot">
-                                <i class="bi bi-stop-circle"></i> Stop Robot
-                            </button>
+                            <p class="mt-3 text-center text-muted">Status: Robot is running.</p>
                         }
-                    </div>
 
-                    @if (!string.IsNullOrEmpty(StopService.robotStatus))
-                    {
-                        <p class="mt-3 text-center text-muted">Status: @StopService.robotStatus</p>
-                    }
-                    else
-                    {
-                        <p class="mt-3 text-center text-muted">Status: Robot is running.</p>
-                    }
-
-                    <div class="d-flex justify-content-center mt-3">
-                        <button class="btn btn-outline-secondary" title="Refresh" @onclick="RefreshPage">
-                            <i class="bi bi-arrow-clockwise"></i> Refresh
-                        </button>
+                        <div class="d-flex justify-content-center mt-3">
+                         
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Task Form -->
-    <h5 class="mt-5">Add a New Task</h5>
-    <EditForm Model="taskType" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="form-group">
-            <label for="taskName">Task Name</label>
-            <InputText id="taskName" class="form-control" @bind-Value="taskType.TypeName" />
-        </div>
-
-        <div class="form-group">
-            <label for="taskDescription">Task Description</label>
-            <InputTextArea id="taskDescription" class="form-control" @bind-Value="taskType.Description" />
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-3">Add Task</button>
-    </EditForm>
-
-    @if (isTaskAdded)
-    {
-        <div class="alert alert-success mt-3">
-            Task added successfully!
-        </div>
-    }
 
     <!-- Task List Table -->
-    <h5 class="mt-4">Task List</h5>
-    <div class="table-responsive">
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h5>Uitgevoerde taken:</h5>
+        <div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskTypeModal">Taken beheren</button>
+            <button class="btn btn-outline-secondary" title="Refresh" @onclick="RefreshPage"><i class="bi bi-arrow-clockwise"></i> Ververs data</button>
+        </div>
+    </div>
+
+    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
         @if (TaskService!.tasks != null && TaskService.tasks.Any())
         {
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Task Name</th>
-                        <th>Description</th>
-                        <th>Timestamp</th>
+                        <th>Taak</th>
+                        <th>Beschrijving</th>
+                        <th>Voltooid op</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,7 +135,84 @@
         }
         else
         {
-            <p>No tasks found.</p>
+            <p>Geen voltooide taken gevonden...</p>
         }
+    </div>
+</div>
+
+<!-- Modal for Task Types -->
+<div class="modal fade" id="taskTypeModal" tabindex="-1" aria-labelledby="taskTypeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskTypeModalLabel">Taaktypes beheren</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Task Type Form -->
+                <h5>Voeg nieuwe taak toe</h5>
+                <EditForm Model="taskType" OnValidSubmit="HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="form-group">
+                        <label for="taskName">Taak naam</label>
+                        <InputText id="taskName" class="form-control" @bind-Value="taskType.TypeName" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taskDescription">Taak beschrijving</label>
+                        <InputTextArea id="taskDescription" class="form-control" @bind-Value="taskType.Description" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Voeg taaktype toe</button>
+                </EditForm>
+
+                @if (isTaskAdded)
+                {
+                    <div class="alert alert-success mt-3">
+                        Taaktypes successvol toegevoegd, pagina opnieuw laden.
+                    </div>
+                } else if (isTaskRemoved)
+                {
+                    <div class="alert alert-danger mt-3">
+                        Taaktype successvol verwijderd, pagina opnieuw laden.
+                    </div>
+                }
+
+                <!-- Task Types Table -->
+                <h5 class="mt-4">Taak types:</h5>
+                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    @if (TaskService!.taskTypes != null && TaskService.taskTypes.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Naam</th>
+                                    <th>Beschrijving</th>
+                                    <th>Verwijder</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var type in TaskService.taskTypes)
+                                {
+                                    <tr>
+                                        <td>@type.TypeName</td>
+                                        <td>@type.Description</td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" @onclick="async () => await HandleValidDelete(type.Id)">Verwijder</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Geen taken gevonden.</p>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </div>

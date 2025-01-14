@@ -11,6 +11,7 @@ namespace Robot_App.Components.Pages
         [Inject]
         public ITask? TaskService { get; set; }
         private bool isTaskAdded = false;
+        private bool isTaskRemoved = false;
         private TaskType taskType = new TaskType();
 
         protected override async Task OnInitializedAsync()
@@ -31,6 +32,8 @@ namespace Robot_App.Components.Pages
                 TaskService.tasks = new List<TaskList>();
                 await TaskService.LoadTasks();
                 TaskService.tasks = TaskService.GetTasks();
+                TaskService.taskTypes = new List<TaskType>();
+                TaskService.taskTypes = TaskService.GetTaskTypes();
             }
             else
             {
@@ -46,6 +49,27 @@ namespace Robot_App.Components.Pages
             isTaskAdded = false;
             await TaskService!.InsertTaskType(taskType);
             taskType = new TaskType();
+            RefreshPage();
+        }
+
+        private async Task HandleValidDelete(int typeId)
+        {
+           if (TaskService != null)
+            {
+                await TaskService.RemoveTaskType(typeId);
+                isTaskRemoved = true;
+                StateHasChanged();
+
+                await Task.Delay(3000);
+                isTaskRemoved = false;
+                StateHasChanged(); 
+                
+                RefreshPage();
+            }
+            else
+            {
+            throw new InvalidOperationException("TaskService is not initialized.");
+            }
         }
 
         private void RefreshPage()
