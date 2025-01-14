@@ -10,6 +10,7 @@ public class Communication : IUpdatable
     private const string TopicStatus = "robot/status";
     private const string TopicBattery = "robot/battery";
     public const string TopicTask = "robot/task";
+    public const string TopicLux = "robot/lux";
 
     private readonly SimpleMqttClient _mqttClient;
     private readonly FZHRobot _robot;
@@ -30,6 +31,7 @@ public class Communication : IUpdatable
         await _mqttClient.SubscribeToTopic(TopicStatus);
         await _mqttClient.SubscribeToTopic(TopicBattery);
         await _mqttClient.SubscribeToTopic(TopicTask);
+        await _mqttClient.SubscribeToTopic(TopicLux);
         await _mqttClient.SubscribeToTopic("#");
         Console.WriteLine("Subscribed to topic: " + TopicStatus);
 
@@ -62,6 +64,12 @@ public class Communication : IUpdatable
     public async Task SendTaskType(int number)
     {
         await PublishMessageToTopic(TopicTask, number.ToString());
+    }
+
+        // Send tasktype
+    public async Task SendLux(int number)
+    {
+        await PublishMessageToTopic(TopicLux, number.ToString());
     }
 
     public async void Update()

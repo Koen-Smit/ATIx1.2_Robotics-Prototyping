@@ -39,6 +39,7 @@ public class Lux : IUpdatable
         {
             LuxLevel = lightSensor.GetLux();
         }
+        // Console.WriteLine("DEBUG: Lux value: " + LuxLevel);
         return LuxLevel;
 
     }

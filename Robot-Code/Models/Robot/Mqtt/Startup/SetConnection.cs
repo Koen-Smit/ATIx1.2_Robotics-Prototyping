@@ -1,3 +1,4 @@
+
 // startup, get mqtt and db connection strings from appsettings.json
 public class SetConnection
 {
@@ -19,4 +20,6 @@ public class SetConnection
     {
         return DbConnectionString;
     }
+
+ 
 }

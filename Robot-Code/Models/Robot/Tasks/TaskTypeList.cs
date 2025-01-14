@@ -1,4 +1,5 @@
 using Avans.StatisticalRobot.Interfaces;
+using Microsoft.Data.SqlClient;
 
 // TaskList class, used to get a random task from a list of tasks
 public class TaskTypeList : IUpdatable
@@ -7,14 +8,14 @@ public class TaskTypeList : IUpdatable
     private readonly ButtonSystem _button;
     private readonly Display _display;
     private readonly Communication _communication;
-
+    private readonly Alert _alert;
     private bool isTaskDisplayed = false; // Taak weergegeven
     private bool taskInProgress = false; // Taak in progress
     private DateTime lastTaskTime; // Tijd van de laatste taakmelding
     private int number;
     private int _delay; // Delay in seconds
 
-    public TaskTypeList(ButtonSystem button, Display display, Communication communication, int delay)
+    public TaskTypeList(ButtonSystem button, Display display, Communication communication, Alert alert, int delay)
     {
         try
         {
@@ -23,23 +24,15 @@ public class TaskTypeList : IUpdatable
             _button = button;
             _display = display;
             _communication = communication;
+            _alert = alert;
             lastTaskTime = DateTime.Now;
             _delay = delay;
             
             taskList = new List<string>();
-            taskList.AddRange(new List<string>
-            {
-                "Medicijnen innemen.",
-                "Water drinken.",
-                "Eten",
-                "Rust nemen",
-                "Wandelen",
-                "Hygiene",
-                "Praten met familie",
-                "Kleding veranderen",
-                "Naar de dokter gaan",
-                "Licht aansteken"
-            });
+
+            //Get tasks
+            List<TaskType> taskTypes = GetTaskTypes();
+            taskList.AddRange(taskTypes.Select(t => t.Name).Where(name => name != null)!);
 
         }
         catch (Exception ex)
@@ -47,6 +40,33 @@ public class TaskTypeList : IUpdatable
             Console.WriteLine($"ERROR: Failed to initialize DisplaySystem. {ex.Message}");
             throw;
         }
+    }
+
+
+       // get Tasktypes from db
+    public List<TaskType> GetTaskTypes()
+    {
+        List<TaskType> taskTypes = new List<TaskType>();
+        using (SqlConnection connection = new SqlConnection(Startup.DbConnectionString))
+        {
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TaskType", connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        taskTypes.Add(new TaskType
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Description = reader.GetString(2)
+                        });
+                    }
+                }
+            }
+        }
+        return taskTypes;
     }
 
     public string GetValue()
@@ -83,6 +103,7 @@ public class TaskTypeList : IUpdatable
 
             _display.SetValue(text);
             taskInProgress = true; // Pause until blue button is pressed
+            _alert.AlertOn();
         }
 
     }
@@ -99,6 +120,7 @@ public class TaskTypeList : IUpdatable
             await _communication.SendTaskType(number);
 
             lastTaskTime = DateTime.Now; // Reset the timer after task completion
+            _alert.AlertOff();
             _display.SetValue(""); // Clear the display
         }
     }

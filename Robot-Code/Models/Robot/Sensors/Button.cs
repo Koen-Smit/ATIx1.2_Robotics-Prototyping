@@ -11,6 +11,7 @@ public class ButtonSystem : IUpdatable
     public bool redIsOn = true; // Boolean to check if the LED is on (ON by default)
     public bool blueIsOn = true; // Boolean to check if the LED is on (ON by default)
     public bool EmergencyStop { get; private set; } = false;  // Emergency stop flag
+    private Alert _alert = new Alert();
 
     public ButtonSystem(string configFilePath = "appsettings.json")
     {
@@ -111,6 +112,7 @@ public class ButtonSystem : IUpdatable
         if (GetRedButtonState() == "Pressed")
         {
             Console.WriteLine("DEBUG: Red button pressed!");
+            _alert.AlertOff();
             ToggleLed(redLed);
         }
 

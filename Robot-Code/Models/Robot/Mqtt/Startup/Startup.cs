@@ -6,6 +6,7 @@ using System.Text.Json;
 // Startup class, to read and deserialize the appsettings.json
 public class Startup
 {
+    public static string DbConnectionString { get; set; } = "";
     public Startup()
     {
         startup();
@@ -45,6 +46,7 @@ public class Startup
         // Now you can use the connection strings from SetConnection
         // Console.WriteLine("MQTT Connection String: " + connection.GetMqttConnectionString());
         // Console.WriteLine("DB Connection String: " + connection.GetDbConnectionString());
+        DbConnectionString = connection.GetDbConnectionString();
         Console.WriteLine("DEBUG: Startup finished");
     }
 

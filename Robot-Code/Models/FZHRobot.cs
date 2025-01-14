@@ -11,6 +11,7 @@ public class FZHRobot : IUpdatable
     private readonly Distance _distance;
     private readonly Alert _alert;
     private readonly ButtonSystem _button;
+    private readonly Lux _lux;
     private readonly ObstacleDetection _obstacleDetection;
     private readonly Communication _communication;
     private readonly TaskTypeList _taskTypeList;
@@ -31,9 +32,10 @@ public class FZHRobot : IUpdatable
         _display = new Display();
         _alert = new Alert();
         _button = new ButtonSystem();
+        _lux = new Lux();
         _obstacleDetection = new ObstacleDetection(_drive, _distance);
         _communication = new Communication(this);
-        _taskTypeList = new TaskTypeList(_button, _display, _communication, _delay);
+        _taskTypeList = new TaskTypeList(_button, _display, _communication, _alert, _delay);
 
         Init().Wait();
     }
@@ -53,7 +55,7 @@ public class FZHRobot : IUpdatable
     }
 
     // Handle received MQTT messages
-    public void HandleMessage(SimpleMqttMessage msg)
+    public async void HandleMessage(SimpleMqttMessage msg)
     {
         Console.WriteLine($"Message received (topic:msg) = {msg.Topic}:{msg.Message}");
         if (msg.Topic == "robot/status")
@@ -61,17 +63,29 @@ public class FZHRobot : IUpdatable
             if (msg.Message == "stopped")
             {
                 Console.WriteLine("Robot stopped");
+                _alert.AlertOff();
                 mqttStop = true;
             }
             else if (msg.Message == "started")
             {
                 Console.WriteLine("Robot started");
                 _display.SetValue(""); // Clear the display
+                _alert.AlertOn();
                 mqttStop = false;
             }
             else if (msg.Message == "update")
             {
                 Console.WriteLine("Robot battery send");
+                // calculate lux average and send to mqtt
+                int lux = _lux.GetValue();
+                int average = 0;
+                for (int i = 0; i < 10; i++)
+                {
+                    average += _lux.GetValue();
+                    await Task.Delay(100);
+                }
+                await _communication.SendLux(average / 10);
+
                 _communication.Update();
             }
         }
@@ -99,7 +113,6 @@ public class FZHRobot : IUpdatable
         {
             // reset variables
             mqttStopCount = false;
-
             // if red button is pressed, the robot will change standby state
             _button.Update();
             standBy = _button.redIsOn;
@@ -112,15 +125,6 @@ public class FZHRobot : IUpdatable
             }
             else
             {
-          
-                // if ()
-                // {
-                //     _drive.EmergencyStop();
-                //     _taskTypeList.Update();
-                // }
-                // else
-                // {
-
 
                 // Update all systems
                 _distance.Update();
@@ -129,9 +133,6 @@ public class FZHRobot : IUpdatable
                 
                 // Update obstacle detection
                 _obstacleDetection.Update(distance);
-
-
-                // }
             }
         }
     }
