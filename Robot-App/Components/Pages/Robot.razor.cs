@@ -24,6 +24,18 @@ namespace Robot_App.Components.Pages
             {
                 throw new InvalidOperationException("BatteryService is not initialized.");
             }
+
+            // load tasks
+            if (TaskService != null)
+            {
+                TaskService.tasks = new List<TaskList>();
+                await TaskService.LoadTasks();
+                TaskService.tasks = TaskService.GetTasks();
+            }
+            else
+            {
+                throw new InvalidOperationException("TaskService is not initialized.");
+            }
         }
 
         //Handle tasktype form
