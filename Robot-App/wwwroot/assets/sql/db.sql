@@ -22,6 +22,15 @@ CREATE TABLE [dbo].[Task] (
     CONSTRAINT FK_Task_TaskType FOREIGN KEY ([TaskTypeID]) REFERENCES [dbo].[TaskType]([ID])
 );
 
+-- Lux table
+CREATE TABLE Lux (
+    [Id] INT IDENTITY (1,1) PRIMARY KEY,
+    [Value] NVARCHAR(MAX) NULL,
+    [time_send] DATETIME NOT NULL
+);
+ALTER TABLE Lux
+ALTER COLUMN [Value] INT NULL;
+
 -- voorbeelddata TaskType tabel
 INSERT INTO [dbo].[TaskType] ([TypeName], [Description])
 VALUES

@@ -10,9 +10,12 @@ namespace Robot_App.Components.Pages
         public IStop? StopService { get; set; }
         [Inject]
         public ITask? TaskService { get; set; }
+        [Inject]
+        public ILux? LuxService { get; set; }
         private bool isTaskAdded = false;
         private bool isTaskRemoved = false;
         private TaskType taskType = new TaskType();
+        private List<Lux> luxes = new List<Lux>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -34,6 +37,16 @@ namespace Robot_App.Components.Pages
                 TaskService.tasks = TaskService.GetTasks();
                 TaskService.taskTypes = new List<TaskType>();
                 TaskService.taskTypes = TaskService.GetTaskTypes();
+                if (LuxService != null)
+                {
+                    LuxService.luxes = new List<Lux>();
+                    await LuxService.LoadLuxes();
+                    luxes = LuxService.GetLuxes();
+                }
+                else
+                {
+                    throw new InvalidOperationException("LuxService is not initialized.");
+                }
             }
             else
             {

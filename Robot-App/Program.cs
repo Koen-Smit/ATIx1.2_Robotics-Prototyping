@@ -52,6 +52,15 @@ builder.Services.AddSingleton<IBattery, BatteryService>(sp =>
     return new BatteryService(connectionString, mqttClient);
 });
 
+builder.Services.AddSingleton<ILux, LuxService>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var mqttConfig = configuration.GetSection("MqttConnection").Get<MqttConfig>();
+
+    var mqttClient = SimpleMqttClient.CreateSimpleMqttClientForHiveMQ("Robot-App", configuration);
+    return new LuxService(connectionString, mqttClient);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

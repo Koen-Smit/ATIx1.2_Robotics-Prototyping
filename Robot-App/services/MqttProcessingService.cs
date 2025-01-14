@@ -7,13 +7,15 @@ public class MqttProcessingService : IHostedService
     private readonly IBattery _batteryService;
     private readonly IStop _stopService; 
     private readonly ITask _taskService;
+    private readonly ILux _luxService;
 
-    public MqttProcessingService(SimpleMqttClient mqttClient, IBattery batteryRepository, IStop stop, ITask task)
+    public MqttProcessingService(SimpleMqttClient mqttClient, IBattery batteryRepository, IStop stop, ITask task, ILux lux)
     {
         _mqttClient = mqttClient;
         _batteryService = batteryRepository;
         _stopService = stop;
         _taskService = task;
+        _luxService = lux;
 
         _mqttClient.OnMessageReceived += (sender, args) => {
             Console.WriteLine($"Incoming MQTT message on {args.Topic}:{args.Message}");
@@ -33,6 +35,10 @@ public class MqttProcessingService : IHostedService
                 // Handle messages on the robot/task topic
                 case "robot/task":
                     _taskService.GetTaskFromMqtt(args.Message);
+                    break;
+                             // Handle messages on the robot/task topic
+                case "robot/lux":
+                    _luxService.GetluxFromMqtt(args.Message);
                     break;
                 default:
                     Console.WriteLine($"Unhandled topic: {args.Topic}");
