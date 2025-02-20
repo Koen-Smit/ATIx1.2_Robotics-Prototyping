@@ -69,3 +69,7 @@ Robot-Code/Models/Robot/Mqtt/Startup/AppSettings.cs
 Robot-Code/appsettings.json
 Robot-Code/bin/Debug/net8.0/appsettings.json
 Robot-Code/bin/Debug/robot/appsettings.json
+
+obj/
+bin/
+.vscode/
