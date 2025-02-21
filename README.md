@@ -1,4 +1,5 @@
-# ATIx1.2 Robotics Prototyping 2024-25 P2
+# Jaar 1, Periode 2: ATIx ICT-B1.2 Robotics Prototyping (2024-25)
+
 - (01-11-2024 / 19-01-2025)
 - Eindpunt(gemiddelde): **8**
 - **Stack:** (Blazor, C#, HTML, CSS, Bootstrap, SQL, MQTT)
