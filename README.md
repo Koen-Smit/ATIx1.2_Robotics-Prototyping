@@ -6,12 +6,6 @@
 
 **Belangrijk**: Applicatie compleet gemaakt rondom de robot en mqtt, alleen de robot moest ingeleverd worden bij school, dus daardoor helaas dit project moeten afsluiten. Wel is alles zo goed mogelijk gedocumenteerd en heb ik bijna alles afgekregen wat ik met die project wou bereiken.
 
-## Project Overview
-This repository consists of two main components:
-
-1. **Robot Code**: Contains the logic and functionality to control and manage the robot.
-2. **Blazor Web App**: A user interface for interacting with the robot remotely, built using Blazor.
-
 ---
 
 ## Folder Structure
