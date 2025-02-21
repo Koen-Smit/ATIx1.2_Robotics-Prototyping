@@ -1,5 +1,10 @@
 # ATIx1.2 Robotics Prototyping 2024-25 P2
-(01-11-2024 / 19-01-2025)
+- (01-11-2024 / 19-01-2025)
+- Eindpunt(gemiddelde): **8**
+- **Stack:** (Blazor, C#, HTML, CSS, Bootstrap, SQL, MQTT)
+- Robot door school geleverd, bevat onder andere: `Raspberry Pi` en de `Romi32U4 controller`
+
+**Belangrijk**: Applicatie compleet gemaakt rondom de robot en mqtt, alleen de robot moest ingeleverd worden bij school, dus daardoor helaas dit project moeten afsluiten. Wel is alles zo goed mogelijk gedocumenteerd en heb ik bijna alles afgekregen wat ik met die project wou bereiken.
 
 ## Project Overview
 This repository consists of two main components:
@@ -12,85 +17,82 @@ This repository consists of two main components:
 ## Folder Structure
 
 ### **Robot Code**
-Located in the `Robot` folder, this part of the project is responsible for all robot-related logic. 
+De robotcode bevindt zich in `/Robot-Code` en bevat alle logica voor de werking van de robot.
 
-#### **Structure**:
+#### **Belangrijke bestanden:**:
 
 - **Mqtt**
-  - `ConnectionStrings.cs`: Handles the MQTT connection strings.
-  - `MqttConnection.cs`: Implements MQTT connection logic.
-  - `SetConnection.cs`: Defines connection configuration.
-  - `Startup.cs`: Initializes the robot's components.
-  - `Communication.cs`: Manages communication via MQTT.
-  - `SimpleMqttClient.cs`: A lightweight MQTT client implementation.
+  - `ConnectionStrings.cs`: Beheert de MQTT-verbindingen.
+  - `MqttConnection.cs`: Implementeert MQTT-logica.
+  - `SetConnection.cs`: Definieert verbindingsinstellingen.
+  - `Startup.cs`: Initialiseert de robotcomponenten.
+  - `Communication.cs`: Beheert communicatie via MQTT.
+  - `SimpleMqttClient.cs`: Een lichte MQTT-clientimplementatie meegekregen door school(kleine aanpassingen aan gedaan).
 
 - **Sensors**
-  - `Button.cs`: Interacts with the robot's buttons.
-  - `Display.cs`: Handles the robot's display functionality.
-  - `Distance.cs`: Manages distance measurement sensors.
-  - `Lux.cs`: Reads light intensity using the lux sensor.
+  - `Button.cs`: Interactie met de knoppen van de robot.
+  - `Display.cs`: Beheer van het robot-lcd-display.
+  - `Distance.cs`: Meet de afstand met een ultrasonic-sensor.
+  - `Lux.cs`: Leest lichtintensiteit met de luxsensor.
 
 - **Tasks**
-  - `Alert.cs`: Manages alert systems.
-  - `Battery.cs`: Tracks and manages battery status.
-  - `Drive.cs`: Handles robot movement.
-  - `ObstacleDetection.cs`: Detects obstacles and manages avoidance.
-  - `Sensor.cs`: General sensor management.
-  - `TaskType.cs` & `TaskTypeList.cs`: Define and manage robot tasks.
-  - `PinReader.cs`: Handles GPIO pin reading.
+  - `Alert.cs`: Beheert alerts.
+  - `Battery.cs`: Houdt de batterijstatus bij.
+  - `Drive.cs`: Regelt de beweging van de robot.
+  - `ObstacleDetection.cs`: Detecteert obstakels en ontwijkt deze.
+  - `Sensor.cs`: Algemene sensorbeheerfunctionaliteit.
+  - `TaskType.cs` & `TaskTypeList.cs`: Definieert en beheert robottaken.
+  - `PinReader.cs`: Leest GPIO-pinnen uit `/appsettings.json` zie: `/appsettings.development.json` voor template.
 
-- `FZHRobot.cs`: The main class managing the robot's functionality and task flow.
+- `FZHRobot.cs`: De hoofdklasse die de robot bestuurt.
 
 ---
 
 ### **Blazor Web App**
-Located in the `Robot-App` folder, this is the user interface for interacting with the robot.
-
-#### **Structure**:
-
-- **Components**
-  - `Layout` folder: Contains layout-related Razor components.
+De Blazor-app bevindt zich in `/Robot-App` en biedt een interface voor interactie met de robot.
+#### **Belangrijke bestanden:**:
 
 - **Pages**
-  - `Error.razor`: Displays error messages.
-  - `Robot.razor`: The main interaction page for the robot.
-  - `_Imports.razor`: Razor imports shared across components.
+  - `Robot.razor`: De hoofdinterface voor interactie met de robot.
 
-- **Models**
-  - `Battery.cs`, `IBattery.cs`: Models and interfaces for battery management.
-  - `Lux.cs`, `ILux.cs`: Models and interfaces for lux sensor data.
-  - `ITask.cs`, `TaskList.cs`, `TaskType.cs`: Define and manage robot tasks.
-  - `MqttConfig.cs`: MQTT configuration details.
-
-- **Services**
-  - `BatteryService.cs`: Service for managing battery data.
-  - `LuxService.cs`: Service for managing lux sensor data.
-  - `MqttProcessingService.cs`: Processes MQTT messages for various tasks.
-  - `SimpleMqttClient.cs`: Implements MQTT client logic.
-  - `StopService.cs`: Service for handling robot stop commands.
-  - `TaskService.cs`: Manages robot tasks and updates.
-
-- **wwwroot**: Contains static files such as CSS, JavaScript, and images.
-
-- **App.razor**: Root Razor component for the application.
-- **Routes.razor**: Defines routing for the application.
-- `Program.cs`: Entry point for the Blazor app.
+- **Backend**
+  - `Battery.cs`, `IBattery.cs`, `BatteryService.cs`: Beheer van batterijgegevens.
+  - `Lux.cs`, `ILux.cs`, `LuxService.cs`: Beheer van luxsensorgegevens.
+  - `ITask.cs`, `TaskList.cs`, `TaskType.cs`, `TaskService.cs`: Takenbeheer.
+  - `MqttConfig.cs`, `MqttProcessingService.cs`, `SimpleMqttClient.cs`: MQTT-configuratie.
+  - `StopService.cs`: Beheer noodstop-knop.
 
 ---
 
-## Key Classes and Files
+## Functionaliteiten
 
-### **Robot Code**
-- `FZHRobot.cs`: Central robot management class that coordinates all components.
-- `MqttProcessingService.cs`: Handles MQTT messages and integrates with robot logic.
+1. **Real-time Robotbesturing**:
+   - Start/stop de robot via MQTT-opdrachten(aangegeven door "in behandeling"). De status van of de robot rijdt of niet is hier ook te zien.
+   ![Img](Assets/Readme_addons/Robot_status.PNG)
+   ![Img](Assets/Readme_addons/In_behandeling.gif)
+   - Stuur en beheer robottaken via de webinterface.
 
-### **Blazor App**
-- `Robot.razor`: UI for monitoring and controlling the robot.
-- `MqttProcessingService.cs`: Processes MQTT messages on the Blazor app side to update the UI and send commands.
+2. **Sensoren en Waarschuwingen**:
+   - Monitor afstanden, lichtintensiteit en knoppenstatus.
+   ![Demo](Assets/Readme_addons/Rondrij_mode.gif)
+   - Activeer waarschuwingen en stuur meldingen.
+   ![Demo](Assets/Readme_addons/Stilstaan_mode_taak.gif)
+
+3. **Webinterface**:
+   - Bekijk real-time gegevens van de robot.
+![Img](Assets/Readme_addons/Webpagina.PNG)
+   - Pas taken aan en stuur commando's.
+![Img](Assets/Readme_addons/Taken_scherm.PNG)
 
 ---
 
-## Getting Started
+## Installatie en Setup
+
+## Vereisten
+- .NET SDK 8.0 of 9.0
+- Visual Studio Code met C# Dev Kit & IntelliCode
+- Installatie van een aangepaste extensie: `Assets/Setup_files/avans-statisticalrobot-1.0.0.vsix`
+
 
 ### **Robot Code**
 1. Configure `appsettings.json` with MQTT broker details, DB connection string and robot-specific settings.
@@ -100,55 +102,15 @@ Located in the `Robot-App` folder, this is the user interface for interacting wi
 1. Update `appsettings.Development.json` with the MQTT broker details and db connection string.
 2. Run the Blazor app locally or deploy it to a hosting service.
 
----
-
-## Key Features
-
-1. **Real-time Robot Control**:
-   - Start/stop the robot using MQTT commands.
-   - Update robot tasks and send updates to the interface.
-
-2. **Sensors and Alerts**:
-   - Monitor sensor data like distance, light intensity (lux), and button presses.
-   - Trigger alerts and display information on the robot's screen.
-
-3. **Blazor Interface**:
-   - Interact with the robot via an intuitive web interface.
-   - View real-time sensor data and control tasks.
-
----
-
-
-# Setting up .NET Libraries for Your Robot Project
-
-To ensure the proper functionality of your robot project, you will need to install and manage several .NET libraries, such as `Avans.StatisticalRobot` and `HiveMQTT`. Follow the steps below to set up these libraries effectively within your Visual Studio Code environment.
-
----
-
-## Prerequisites
-
-- Install .NET SDK version 8.0 (or 9.0 if you'd like to experiment, though adjustments may be needed).
-- Visual Studio Code should already be set up with the **C# Dev Kit** and optionally **IntelliCode for C# Dev Kit** extensions.
-- set up the custom extension to manage the robot, its added in this project: `avans-statisticalrobot-1.0.0.vsix`
-
----
 
 ## Installing a NuGet Package
 
-In Visual Studio Code, you can add NuGet packages directly to your project using the terminal:
+1. **Open terminal:**:  
+   Open de terminal in VS Code (`Ctrl + `` `).
 
-1. **Open the Terminal**:  
-   Use the shortcut `Ctrl + `` ` to open the terminal in Visual Studio Code.
-
-2. **Add a NuGet Package**:  
-   Use the following command to install the required NuGet package:  
+2. **Voeg NuGet-package toe**:  
    ```bash
    dotnet add package <package_name>
-   ```
-
-   Example: To install the `Avans.StatisticalRobot` library:  
-   ```bash
-   dotnet add package Avans.StatisticalRobot
    ```
 
    For `HiveMQTT` (a lightweight MQTT library for .NET):  
@@ -156,64 +118,26 @@ In Visual Studio Code, you can add NuGet packages directly to your project using
    dotnet add package HiveMQTT
    ```
 
-3. **Restore Dependencies**:  
-   Once you’ve added the package, ensure all dependencies are restored by running:  
+3. **Herstel dependencies:**:  
    ```bash
    dotnet restore
    ```
 
 ---
 
-## Managing and Updating Libraries
-
-Over time, you may need to update the libraries in your project. For this, use the `dotnet-outdated` tool.
-
-1. **Install the `dotnet-outdated` Tool**:  
-   This tool checks for outdated packages and simplifies updates. Install it globally using the following command:  
-   ```bash
-   dotnet tool install --global dotnet-outdated-tool
-   ```
-
-2. **Check for Updates**:  
-   In the terminal, run:  
-   ```bash
-   dotnet-outdated
-   ```
-
-   This will list all outdated packages in your project.
-
-3. **Update Packages**:  
-   To update all outdated packages:  
-   ```bash
-   dotnet-outdated -u
-   ```
-
-   Alternatively, if you need to update a specific package to a known version (e.g., a beta release), you can run:  
-   ```bash
-   dotnet add package <package_name> --version <version_number>
-   ```
-
-   Example: To update `Avans.StatisticalRobot` to version `1.1.6-beta`:  
-   ```bash
-   dotnet add package Avans.StatisticalRobot --version 1.1.6-beta
-   ```
-
----
-
-## About HiveMQTT and Avans.StatisticalRobot
+##  Over HiveMQTT & Avans.StatisticalRobot
 
 - **HiveMQTT**:  
-  This lightweight library allows your robot to communicate via MQTT, a messaging protocol ideal for IoT devices. You'll use this library to send and receive data between the robot and external systems.
+  Een lichtgewicht MQTT-library voor communicatie tussen de robot en externe systemen.
 
 - **Avans.StatisticalRobot**:  
-  This custom library simplifies communication between the Raspberry Pi (via .NET) and the Romi32U4 control board. It also provides additional tools for handling sensors, motors, and other peripherals.  
-
-  For installation, follow the steps above. You can also view the full version history and updates [here](https://www.nuget.org/packages/Avans.StatisticalRobot).
+  Een aangepaste library die communicatie tussen de Raspberry Pi en de Romi32U4 controller optimaliseert. Voor meer info: [Klik hier](https://www.nuget.org/packages/Avans.StatisticalRobot).
 
 ---
 
-## Debugging and Tips for Development
+## Debugging & Tips
 
-- Always ensure that the robot and your laptop are connected to the same Wi-Fi network for seamless communication.
+- Zorg ervoor dat je laptop en de robot zich op hetzelfde Wi-Fi-netwerk bevinden.
+- Gebruik `dotnet run` om de applicatie lokaal te testen.
 
 ---
