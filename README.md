@@ -93,15 +93,8 @@ De Blazor-app bevindt zich in `/Robot-App` en biedt een interface voor interacti
 - Visual Studio Code met C# Dev Kit & IntelliCode
 - Installatie van een aangepaste extensie: `Assets/Setup_files/avans-statisticalrobot-1.0.0.vsix`
 
-
-### **Robot Code**
-1. Configure `appsettings.json` with MQTT broker details, DB connection string and robot-specific settings.
-2. Build and deploy the code to the robot's environment.
-
-### **Blazor App**
-1. Update `appsettings.Development.json` with the MQTT broker details and db connection string.
-2. Run the Blazor app locally or deploy it to a hosting service.
-
+### **Appsettings.json**
+Zorg ervoor dat bij beide projecten een goed geconfigureerde `/appsettings.json` aanwezig is, waarin alle databaseverbindingen, MQTT-strings en robot-connectiepins te vinden zijn.
 
 ## Installing a NuGet Package
 
