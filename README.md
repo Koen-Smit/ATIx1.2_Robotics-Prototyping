@@ -1,4 +1,4 @@
-# Jaar 1, Periode 2: ATIx ICT-B1.2 Robotics Prototyping (2024-25)
+# Avans HBO Jaar 1, Periode 2: ATIx ICT-B1.2 Robotics Prototyping (2024-25)
 
 - (01-11-2024 / 19-01-2025)
 - Eindpunt(gemiddelde): **8,6**
@@ -48,9 +48,9 @@ Dit project is het tweede project van mijn opleiding Informatica. De applicatie 
 
 ### NuGet Package(HiveMQTT & Avans.StatisticalRobot)
 - **HiveMQTT:**  
-  Dit project maakt gebruik van MQTT voor communicatie en een database voor opslag. Zorg ervoor dat de juiste configuraties zijn ingesteld in /appsettings.json.
+  Dit project maakt gebruik van MQTT voor communicatie en een database voor opslag. Zorg ervoor dat de juiste configuraties zijn ingesteld in `/appsettings.json.`
 - **Avans.StatisticalRobot:**  
-  Een aangepaste library, geleverd door school, die communicatie tussen de Raspberry Pi en de Romi32U4 controller optimaliseert. Voor meer info: [Klik hier](https://www.nuget.org/packages/Avans.StatisticalRobot).
+  Een aangepaste library, geleverd door school, die communicatie tussen de `Raspberry Pi` en de `Romi32U4` controller optimaliseert. Voor meer info: [Klik hier](https://www.nuget.org/packages/Avans.StatisticalRobot).
 ### Nuget packages:
 1. **Open een Command Line Interface (CLI)**
 2. **Navigeer naar de projectmap**
